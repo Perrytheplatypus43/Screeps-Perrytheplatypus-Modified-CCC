@@ -106,7 +106,7 @@ mod.FLAG_COLOR = {
             color: COLOR_CYAN,
             secondaryColor: COLOR_GREY,
         },
-        powerSpawn: { // construct a power spawn at flagwhen available
+        powerSpawn: { // construct a power spawn at flag when available
             color: COLOR_CYAN,
             secondaryColor: COLOR_WHITE,
         }

@@ -242,8 +242,9 @@ mod.extend = function() {
                 if (xPos >= 50 || xPos < 0 || yPos >= 50 || yPos < 0) return failed();
                 const pos = room.getPositionAt(xPos, yPos);
                 const structureType = layout[x] && layout[x][y];
+                const terrain = Game.map.getRoomTerrain(Game.rooms);
                 if (structureType) {
-                    if (Game.map.getTerrainAt(pos) === 'wall') return failed();
+                  if(terrain.get(pos) == TERRAIN_MASK_WALL) return failed();
                     if (structureType === STRUCTURE_ROAD) {
                         sites.push(pos);
                     } else {

@@ -1,4 +1,4 @@
-// useful commands
+// useful commands test
 
 // Recycle a creep
 Creep.action.recycling.assign(Game.creeps['<creepName>']);
@@ -23,7 +23,7 @@ Task.forceSpawn(Task.guard.creep.guard, {targetRoom: 'W0N0', allowTargetRoom: tr
 Memory.rooms['<roomName>'].spawnQueueLow = [0];
 // clear medium priority queue
 Memory.rooms['<roomName>'].spawnQueueMedium = [0];
-// clear high priority queue 
+// clear high priority queue
 Memory.rooms['<roomName>'].spawnQueueHigh = [0];
 
 // check if a specific creep type is in queue
@@ -39,7 +39,7 @@ Game.creeps['<creepName>'].move(RIGHT);
 // force recycle a Creep
 Game.creeps['<creepName>'].data.creepType="recycler";
 
-// To override a module file create a copy of an existing module and name it "custom.<originalModuleName>". Then call this method (without ".js"): 
+// To override a module file create a copy of an existing module and name it "custom.<originalModuleName>". Then call this method (without ".js"):
 getPath('<originalModuleName>', true);
 // To completely re-evaluate all modules:
 delete Memory.modules;

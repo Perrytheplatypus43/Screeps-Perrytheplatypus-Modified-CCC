@@ -1,4 +1,4 @@
-// useful commands test
+// useful commands tests
 
 // Recycle a creep
 Creep.action.recycling.assign(Game.creeps['<creepName>']);

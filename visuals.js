@@ -674,10 +674,12 @@ const Visuals = class {
             for (let x = 0; x < 50; x++) {
                 for (let y = 0; y < 50; y++) {
                     const pos = room.getPositionAt(x, y);
-                    const terrain = Game.map.getRoomTerrain(Game.rooms);
-                    if(terrain.get(pos) == TERRAIN_MASK_WALL) continue;
-                    const key = `${String.fromCharCode(32 + x)}${String.fromCharCode(32 + y)}_x${x}-y${y}`;
-                    r[key] = 0;
+                    _.forEach(Game.rooms, room => {
+                      let terrain = Game.map.getRoomTerrain(room.name)
+                      if(terrain.get(pos) == TERRAIN_MASK_WALL) continue;
+                      const key = `${String.fromCharCode(32 + x)}${String.fromCharCode(32 + y)}_x${x}-y${y}`;
+                      r[key] = 0;
+                    })
                 }
             }
             return r;

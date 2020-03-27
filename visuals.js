@@ -679,6 +679,7 @@ const Visuals = class {
                       if(terrain.get(pos) == TERRAIN_MASK_WALL) continue;
                       const key = `${String.fromCharCode(32 + x)}${String.fromCharCode(32 + y)}_x${x}-y${y}`;
                       r[key] = 0;
+                      return;
                     })
                 }
             }

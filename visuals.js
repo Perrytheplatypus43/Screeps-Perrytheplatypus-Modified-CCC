@@ -676,7 +676,7 @@ const Visuals = class {
                     const pos = room.getPositionAt(x, y);
                     _.forEach(Game.rooms, room => {
                       let terrain = Game.map.getRoomTerrain(room.name)
-                      if(terrain.get(pos) == TERRAIN_MASK_WALL) continue;
+                      if(terrain.get(pos) == TERRAIN_MASK_WALL) return;
                       const key = `${String.fromCharCode(32 + x)}${String.fromCharCode(32 + y)}_x${x}-y${y}`;
                       r[key] = 0;
                       return;

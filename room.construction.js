@@ -244,8 +244,11 @@ mod.extend = function() {
                 const structureType = layout[x] && layout[x][y];
                 const terrain = Game.map.getRoomTerrain(Game.rooms);
                 if (structureType) {
-                  if(terrain.get(pos) == TERRAIN_MASK_WALL) return failed();
-                    if (structureType === STRUCTURE_ROAD) {
+                  _.forEach(Game.rooms, room => {
+                    let terrain = Game.map.getRoomTerrain(room.name)
+                    if(terrain.get(pos) == TERRAIN_MASK_WALL) return failed();
+                  }
+                      if (structureType === STRUCTURE_ROAD) {
                         sites.push(pos);
                     } else {
                         const flagColour = constructionFlags[structureType];

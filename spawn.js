@@ -87,7 +87,7 @@ mod.extend = function(){
     };
     Spawn.prototype.create = function(body, name, behaviour, destiny){
         if( body.length == 0 ) return false;
-        var newName = this.spawnCreep(body, name, Memory.creeps[name]);
+        var newName = this.spawnCreep(body, name, Memory.creeps[name] {dryrun = flase};
         if( name == newName || translateErrorCode(newName) === undefined ){
             let cost = 0;
             body.forEach(function(part){

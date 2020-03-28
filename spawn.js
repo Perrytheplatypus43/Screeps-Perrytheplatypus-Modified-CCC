@@ -12,15 +12,15 @@ mod.extend = function(){
     Spawn.prototype.execute = function(){
         if( this.spawning ) return;
         let room = this.room;
-        // old spawning system 
+        // old spawning system
         let that = this;
         let probe = setup => {
             return setup.isValidSetup(room) && that.createCreepBySetup(setup);
         };
-        
+
         const spawnDelay = Util.get(this.room.memory, 'spawnDelay', {});
         let busy = this.createCreepByQueue(room.spawnQueueHigh, 'High');
-        // don't spawn lower if there is one waiting in the higher queue 
+        // don't spawn lower if there is one waiting in the higher queue
         if( !busy && (room.spawnQueueHigh.length === 0  || room.spawnQueueHigh.length === spawnDelay.High) && Game.time % SPAWN_INTERVAL === 0 ) {
             busy = _.some(Spawn.priorityHigh, probe);
             if( !busy ) busy = this.createCreepByQueue(room.spawnQueueMedium, 'Medium');
@@ -87,7 +87,7 @@ mod.extend = function(){
     };
     Spawn.prototype.create = function(body, name, behaviour, destiny){
         if( body.length == 0 ) return false;
-        var newName = this.createCreep(body, name, null);
+        var newName = this.StructureSpawn.spawnCreep(body, name, null);
         if( name == newName || translateErrorCode(newName) === undefined ){
             let cost = 0;
             body.forEach(function(part){
@@ -101,7 +101,7 @@ mod.extend = function(){
                 this.room,
                 this.name,
                 body,
-                destiny); 
+                destiny);
             this.newSpawn = {name: newName};
             Creep.spawningStarted.trigger({spawn: this.name, name: newName, body: body, destiny: destiny, spawnTime: body.length * CREEP_SPAWN_TIME});
             if(CENSUS_ANNOUNCEMENTS) global.logSystem(this.pos.roomName, dye(CRAYON.birth, 'Good morning ' + newName + '!') );

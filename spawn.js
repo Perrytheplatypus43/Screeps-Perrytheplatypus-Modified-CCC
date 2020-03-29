@@ -12,7 +12,7 @@ mod.extend = function(){
     Spawn.prototype.execute = function(){
         if( this.spawning ) return;
         let room = this.room;
-        // old spawning system
+        // old spawning system.
         let that = this;
         let probe = setup => {
             return setup.isValidSetup(room) && that.createCreepBySetup(setup);

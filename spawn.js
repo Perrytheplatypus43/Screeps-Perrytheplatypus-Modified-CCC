@@ -88,7 +88,7 @@ mod.extend = function(){
     Spawn.prototype.create = function(body, name, behaviour, destiny){
         if( body.length == 0 ) return false;
         let result = this.spawnCreep(body, name);
-        if(!result) {
+        if(translateErrorCode(result) != 'OK') {
           if( global.DEBUG || CENSUS_ANNOUNCEMENTS ) global.logSystem(this.pos.roomName, dye(CRAYON.error, 'Offspring failed: ' + translateErrorCode(result) + '<br/> - body: ' + JSON.stringify(_.countBy(body)) + '<br/> - name: ' + name + '<br/> - behaviour: ' + behaviour + '<br/> - destiny: ' + destiny) );
           return false;
         }

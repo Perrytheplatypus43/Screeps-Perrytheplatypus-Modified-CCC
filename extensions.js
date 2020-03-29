@@ -65,7 +65,7 @@ mod.extend = function(){
        configurable: true,
        get() {
            return (this.hits <= MIN_FORTIFY_LIMIT[this.room.controller.level]);
-       } 
+       }
     });
     Object.defineProperty(StructureContainer.prototype, 'active', {
         configurable: true,
@@ -419,8 +419,8 @@ mod.extend = function(){
             if( resourceType == RESOURCE_ENERGY && this.energy < this.energyCapacity * 0.75 ) {
                 return this.energyCapacity - this.energy;
             }
-            if( resourceType == RESOURCE_POWER && this.power < this.powerCapacity * 0.25 ) {
-                return this.powerCapacity - this.power;
+            if( resourceType == RESOURCE_POWER && this.power < this.store.getCapacity(RESOURCE_POWER) * 0.25 ) {
+                return this.store.getCapacity(RESOURCE_POWER) - this.power;
             }
             return 0;
         }
@@ -448,7 +448,7 @@ mod.extend = function(){
             space = this.energyCapacity-this.energy;
         } else if (resourceType == RESOURCE_POWER) {
             store = this.power;
-            space = this.powerCapacity-this.power;
+            space = this.store.getCapacity(RESOURCE_POWER) - this.power;
         }
         if (store < loadTarget) return Math.min(loadTarget-store,space);
         if (store > unloadTarget * 1.05) return unloadTarget-store;
@@ -482,4 +482,3 @@ module.exports = mod;
             }
         });
         */
-        

@@ -87,27 +87,27 @@ mod.extend = function(){
     };
     Spawn.prototype.create = function(body, name, behaviour, destiny){
         if( body.length == 0 ) return false;
-        let newName = this.spawnCreep(body, name);
-        if( name == newName || translateErrorCode(newName) === undefined ){
+        let result = this.spawnCreep(body, name);
+        if(!translateErrorCode(result) ){
             let cost = 0;
             body.forEach(function(part){
                 cost += BODYPART_COST[part];
             });
             this.room.reservedSpawnEnergy += cost;
             Population.registerCreep(
-                newName,
+                name,
                 behaviour,
                 cost,
                 this.room,
                 this.name,
                 body,
                 destiny);
-            this.newSpawn = {name: newName};
-            Creep.spawningStarted.trigger({spawn: this.name, name: newName, body: body, destiny: destiny, spawnTime: body.length * CREEP_SPAWN_TIME});
-            if(CENSUS_ANNOUNCEMENTS) global.logSystem(this.pos.roomName, dye(CRAYON.birth, 'Good morning ' + newName + '!') );
+            this.newSpawn = {name};
+            Creep.spawningStarted.trigger({spawn: this.name, name, body, destiny, spawnTime: body.length * CREEP_SPAWN_TIME});
+            if(CENSUS_ANNOUNCEMENTS) global.logSystem(this.pos.roomName, dye(CRAYON.birth, 'Good morning ' + name + '!') );
             return true;
-        }
-        if( global.DEBUG || CENSUS_ANNOUNCEMENTS ) global.logSystem(this.pos.roomName, dye(CRAYON.error, 'Offspring failed: ' + translateErrorCode(newName) + '<br/> - body: ' + JSON.stringify(_.countBy(body)) + '<br/> - name: ' + name + '<br/> - behaviour: ' + behaviour + '<br/> - destiny: ' + destiny) );
+        
+        if( global.DEBUG || CENSUS_ANNOUNCEMENTS ) global.logSystem(this.pos.roomName, dye(CRAYON.error, 'Offspring failed: ' + translateErrorCode(result) + '<br/> - body: ' + JSON.stringify(_.countBy(body)) + '<br/> - name: ' + name + '<br/> - behaviour: ' + behaviour + '<br/> - destiny: ' + destiny) );
         return false;
     };
 };

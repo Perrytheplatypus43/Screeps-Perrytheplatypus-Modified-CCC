@@ -1,8 +1,8 @@
 const mod = {
-    
+
     extend() {
         this.baseOf.internalViral.extend.call(this);
-    
+
         Room.prototype.prepareResourceOrder = function(containerId, resourceType, amount) {
             let container = Game.getObjectById(containerId);
             if (!this.my || !container || !container.room.name == this.name ||
@@ -52,11 +52,11 @@ const mod = {
             }
             return OK;
         };
-    
+
         Room.prototype.updateResourceOrders = function() {
             let data = this.memory.resources;
             if (!this.my || !data) return;
-        
+
             // go through reallacation orders and reset completed orders
             for(var structureType in data) {
                 for(var i=0;i<data[structureType].length;i++) {
@@ -95,7 +95,7 @@ const mod = {
                                     case STRUCTURE_NUKER:
                                         // get nuker amount
                                         if (order.type == RESOURCE_GHODIUM) {
-                                            amount = cont.ghodium;
+                                            amount = cont.store[RESOURCE_GHODIUM];
                                         } else if (order.type == RESOURCE_ENERGY) {
                                             amount = cont.energy;
                                         }
@@ -116,6 +116,6 @@ const mod = {
             }
         };
     }
-    
+
 };
 module.exports = mod;

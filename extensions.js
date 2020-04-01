@@ -402,8 +402,8 @@ mod.extend = function(){
             cap = this.energyCapacity;
         } else {
             if (this.mineralType == resourceType) store = this.mineralAmount;
-            space = this.store.getCapacity(this.mineralType)-this.mineralAmount;
-            cap = this.store.getCapacity(this.mineralType);
+            space = this.mineralCapacity-this.mineralAmount;
+            cap = this.mineralCapacity;
         }
         if( store < Math.min(loadTarget,cap) / 2 ) return Math.min( loadTarget-store,space );
         if( containerData && containerData.reactionType === this.mineralType ) {

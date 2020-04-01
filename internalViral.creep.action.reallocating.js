@@ -72,7 +72,7 @@ mod.findNeeding = function(room, resourceType, amountMin, structureId){
             const lab = Game.getObjectById(labs[i].id);
             let amount = 0;
             if (lab) amount = lab.getNeeds(resourceType);
-            if (amount >= amountMin && (lab.mineralAmount === 0 || lab.mineralType == resourceType || resourceType == RESOURCE_ENERGY) && lab.id != structureId) {
+            if (amount >= amountMin && (lab.store[lab.mineralType] === 0 || lab.mineralType == resourceType || resourceType == RESOURCE_ENERGY) && lab.id != structureId) {
                 return { structure: lab, amount: amount};
             }
         }
@@ -102,7 +102,7 @@ mod.findNeeding = function(room, resourceType, amountMin, structureId){
             let amount = 0;
             if (container) amount = container.getNeeds(resourceType);
             if (amount >= amountMin && container.id != structureId) {
-                return { structure: container, amount: amount };   
+                return { structure: container, amount: amount };
             }
         }
     }
@@ -128,7 +128,7 @@ mod.findNeeding = function(room, resourceType, amountMin, structureId){
     if (terminal && resourceType != RESOURCE_ENERGY && resourceType != RESOURCE_POWER && terminal.storeCapacity-terminal.sum > amountMin) {
         return { structure: terminal, amount: 0 };
     }
-    
+
     // no destination found
     return null;
 };
@@ -264,4 +264,3 @@ mod.work = function(creep) {
     }
     return workResult;
 };
-

@@ -36,7 +36,7 @@ mod.extend = function() {
                                 case STRUCTURE_LAB:
                                     // get lab amount
                                     if (order.type == cont.mineralType) {
-                                        amount = cont.mineralAmount;
+                                        amount = cont.store[cont.mineralType];
                                     } else if (order.type == RESOURCE_ENERGY) {
                                         amount = cont.energy;
                                     }
@@ -103,7 +103,7 @@ mod.extend = function() {
                             powerSpawn: [],
                         };
                     }
-					
+
 					let offered = _(room.memory.resources.offers).flatten().groupBy('type').transform((result, val, key) => (result[key] = _.sum(val, 'amount'))).value();
 					let available = (room.storage.store[order.type] || 0) + (room.terminal.store[order.type] || 0) - (offered[order.type] || 0);
                     if (available < 100) continue;
@@ -309,7 +309,7 @@ mod.extend = function() {
             } else {
                 let containerStore = 0;
                 if ( container.structureType === STRUCTURE_LAB ) {
-                    containerStore = (container.mineralType==resourceType) ? container.mineralAmount : 0;
+                    containerStore = (container.mineralType==resourceType) ? container.store[container.mineralType] : 0;
                 } else {
                     containerStore = (container.store[resourceType]||0);
                 }

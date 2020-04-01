@@ -33,7 +33,7 @@ action.findNeeding = function(room, resourceType, amountMin, structureId){
             const lab = Game.getObjectById(labs[i].id);
             let amount = 0;
             if (lab) amount = lab.getNeeds(resourceType);
-            if (amount >= amountMin && (lab.mineralAmount === 0 || lab.mineralType == resourceType || resourceType == RESOURCE_ENERGY) && lab.id != structureId) {
+            if (amount >= amountMin && (lab.store[lab.mineralType] === 0 || lab.mineralType == resourceType || resourceType == RESOURCE_ENERGY) && lab.id != structureId) {
                 return { structure: lab, amount: amount};
             }
         }
@@ -56,7 +56,7 @@ action.findNeeding = function(room, resourceType, amountMin, structureId){
             let amount = 0;
             if (container) amount = container.getNeeds(resourceType);
             if (amount >= amountMin && container.id != structureId) {
-                return { structure: container, amount: amount };   
+                return { structure: container, amount: amount };
             }
         }
     }
@@ -82,7 +82,7 @@ action.findNeeding = function(room, resourceType, amountMin, structureId){
     if (terminal && terminal.active && resourceType != RESOURCE_ENERGY && resourceType != RESOURCE_POWER && terminal.storeCapacity-terminal.sum > amountMin) {
         return { structure: terminal, amount: 0 };
     }
-    
+
     // no destination found
     return null;
 };
@@ -96,7 +96,7 @@ action.newTargetLab = function(creep) {
             let lab = Game.getObjectById(d.id);
             if (!lab) continue;
             var amount = 0;
-            if (lab.mineralAmount > 0) {
+            if (lab.store[lab.mineralType] > 0) {
                 amount = lab.getNeeds(lab.mineralType);
                 if (amount < 0) {
                     // lab has extra resource to be taken elsewhere

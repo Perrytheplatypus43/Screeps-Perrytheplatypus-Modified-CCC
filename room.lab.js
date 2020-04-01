@@ -207,7 +207,7 @@ mod.extend = function() {
         let burstReactors = 0;
         for (let i=0;i<reactors.length;i++) {
             let reactor = reactors[i];
-            if ( reactor.mineralAmount === 0 || ( reactor.mineralType === order.type && reactor.mineralAmount <= reactor.mineralCapacity - LAB_REACTION_AMOUNT && burstReactors < maxReactions ) ) {
+            if ( reactor.mineralAmount === 0 || ( reactor.mineralType === order.type && reactor.mineralAmount <= reactor.store.getCapacity(lab.mineralType) - LAB_REACTION_AMOUNT && burstReactors < maxReactions ) ) {
                 burstReactors++;
                 // FU - SION - HA !
                 if ( reactor.runReaction( seed_a, seed_b ) === OK ) {
